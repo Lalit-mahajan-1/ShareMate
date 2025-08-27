@@ -42,7 +42,7 @@ export const create = async (req, res) => {
       httpOnly: true,
       maxAge: time * 1000,
       sameSite: "lax",
-      secure: true  
+      secure: process.env.NODE_ENV === "production"
     });
 
     await newUser.save();
@@ -64,7 +64,7 @@ export const login = async (req, res) => {
       httpOnly: true,
       maxAge: time * 1000,
       sameSite: "lax",
-      secure: true  
+      secure: process.env.NODE_ENV === "production"
     });
 
     res.status(200).json({ message: "Login success" });
@@ -96,7 +96,7 @@ export const googleLogin = async (req, res) => {
       httpOnly: true,
       maxAge: time * 1000,
       sameSite: "lax",
-      secure: true  
+      secure: process.env.NODE_ENV === "production"
     });
 
 
