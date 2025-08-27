@@ -11,11 +11,11 @@ import requireAuth from './middleware/auth.js'
 import User from './model/usermodel.js';
 const app = express()
 app.use(bodyparser.json());
+dotenv.config({quiet:true});
 app.use(cors({
   origin: process.env.Frontend_URL,
   credentials: true
 }));
-dotenv.config({quiet:true});
 app.use(cookieParser())
 const PORT = process.env.PORT || 7000;
 const MONGOURL = process.env.MONGO_URL;
