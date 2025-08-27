@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useContext } from "react";
 import { createTheme } from '@mui/material/styles';
-import './ThemeSelector.css'
+import './Themeselector.css'
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 
