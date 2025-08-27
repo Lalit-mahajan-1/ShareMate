@@ -13,36 +13,24 @@ const app = express()
 dotenv.config({quiet:true});
 
 app.use(bodyparser.json());
+const allowedOrigins = [
+  process.env.FRONTEND_URL, 
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://localhost:5174'
+].filter(Boolean);
+
 app.use(cors({
   origin: function (origin, callback) {
-    console.log('Request origin:', origin); 
- 
     if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      process.env.LOCAL_URL,
-      process.env.FRONTEND_URL,
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'http://localhost:5174', 
-    ].filter(Boolean); 
-    
-    console.log('Allowed origins:', allowedOrigins); 
-    
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      console.log('Origin not allowed:', origin);
-      callback(null, true); 
-    
+      callback(new Error("Not allowed by CORS: " + origin), false);
     }
   },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-  exposedHeaders: ['Set-Cookie']
+  credentials: true
 }));
-
 app.options('*', cors());
 
 app.use((req, res, next) => {
@@ -70,6 +58,7 @@ app.use('/images', express.static('public/images'));
 app.use("/Notes",requireAuth,noteroutes)
 app.get("/me", requireAuth, async (req, res) => {
   try {
+    console.log(req.cookies)
     const user = await User.findById(req.userId);
     res.json({ name:user.name,id: req.userId, email: user.email,UserBrowser:req.headers['user-agent'],Date:new Date().toDateString()});
   } catch (err) {
