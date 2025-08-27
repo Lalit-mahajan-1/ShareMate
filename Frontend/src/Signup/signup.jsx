@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "./Signup.css";
+import "./signup.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
