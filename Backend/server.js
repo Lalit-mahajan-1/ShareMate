@@ -31,7 +31,7 @@ app.use(cors({
   },
   credentials: true
 }));
-app.options('*', cors());
+
 
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
@@ -55,7 +55,6 @@ mongoose
   .catch((error) => console.log(error));
 
 app.use('/images', express.static('public/images'));
-app.use("/Notes",requireAuth,noteroutes)
 app.get("/me", requireAuth, async (req, res) => {
   try {
     console.log(req.cookies)
@@ -77,11 +76,13 @@ app.get("/isLogedIn",requireAuth,async(req,res)=>{
     res.status(500).json({ error: "Failed to fetch user info" });
   }
 })
+
+app.use("/Notes",requireAuth,noteroutes)
 app.use("/user",userroutes)
 app.use("/History",historyroutes)
 
 
-app.all('*', (req, res) => {
+app.all('/*splat', (req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 

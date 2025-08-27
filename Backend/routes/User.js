@@ -1,6 +1,5 @@
 import express from "express";
 const route = express.Router();
-const app = express();
 import { create, googleLogin, login, logout } from "../controller/User.js";
 
 route.post("/signup", create);
