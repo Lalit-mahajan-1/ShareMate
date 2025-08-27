@@ -57,7 +57,6 @@ mongoose
 app.use('/images', express.static('public/images'));
 app.get("/me", requireAuth, async (req, res) => {
   try {
-    console.log(req.cookies)
     const user = await User.findById(req.userId);
     res.json({ name:user.name,id: req.userId, email: user.email,UserBrowser:req.headers['user-agent'],Date:new Date().toDateString()});
   } catch (err) {
