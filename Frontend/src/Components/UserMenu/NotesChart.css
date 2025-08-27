@@ -1,0 +1,85 @@
+.notes-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.notes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+  gap: 20px;
+}
+
+.notes-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a237e;
+  margin-bottom: 4px;
+  margin-left: 30px;
+}
+
+.notes-count {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #667eea;
+  text-align: center;
+}
+
+.notes-graph {
+  width: 100%;
+  max-width: 600px;
+}
+
+.month-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #5066c5;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .notes-title {
+    margin-left: 15px;
+    font-size: 1.1rem;
+  }
+  
+  .month-name {
+    font-size: 1.1rem;
+    margin-right: 5px;
+  }
+  
+  .notes-count {
+    font-size: 1.3rem;
+  }
+  
+  .notes-header {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-title {
+    margin-left: 10px;
+    font-size: 1rem;
+  }
+  
+  .month-name {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+  
+  .notes-count {
+    font-size: 1.2rem;
+  }
+  
+  .notes-header {
+    gap: 10px;
+  }
+}

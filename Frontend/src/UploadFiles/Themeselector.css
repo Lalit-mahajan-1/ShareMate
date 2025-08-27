@@ -1,0 +1,20 @@
+.parent {
+  display: grid;
+  grid-template-columns: repeat(2, 40px); /* 2 boxes per row */
+  gap: 10px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.child {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.child :hover {
+  transform: scale(1.1);
+}

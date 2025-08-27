@@ -1,0 +1,211 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 16px 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.allnotes-btn{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 2vh;
+  margin-right: 20vw;
+}
+.subcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  min-height: 28vh;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
+  padding: 12px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+}
+
+.subcontainer:hover {
+  transform: translateY(-3px);
+}
+
+.subcontainer .notesImage {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f9fafb;
+}
+
+.subcontainer .notesImage img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.subcontainer .notesImage:hover img {
+  transform: scale(1.01);
+}
+
+.subcontainer .notesText {
+  margin-top: 8px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1f2a44;
+}
+
+.subcontainer .notesText button {
+  background: transparent;
+  border: 1px solid #1e40af;
+  color: #1e40af;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+.subcontainer .notesText button:hover {
+  background: #1e40af;
+  color: white;
+}
+
+.subcontainer .notesText button:last-child {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.subcontainer .notesText button:last-child:hover {
+  background: #dc2626;
+  color: white;
+}
+
+.subcontainer .Note-Date {
+  align-self: flex-start;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e40af;
+  padding: 4px 6px;
+  margin-bottom: 4px;
+}
+
+.container:empty::after {
+  content: 'No notes available. Upload your first note!';
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #6b7280;
+  background: white;
+  border-radius: 8px;
+  border: 1px dashed #d1d5db;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .container {
+    padding: 76px 12px 28px;
+    gap: 16px;
+  }
+  .subcontainer {
+    width: 45vw;
+    min-height: 26vh;
+  }
+  .allnotes-btn{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 2vh;
+  margin-right: 4vw;
+}
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 72px 10px 24px;
+    gap: 12px;
+  }
+  .subcontainer {
+    width: 48vw;
+    min-height: 24vh;
+  }
+  .subcontainer .notesText {
+    font-size: 0.85rem;
+  }
+  .subcontainer .Note-Date {
+    font-size: 0.8rem;
+    padding: 3px 5px;
+  }
+  .subcontainer .notesText button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    min-width: 55px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 68px 8px 20px;
+    gap: 10px;
+  }
+  .subcontainer {
+    width: 92vw;
+    min-height: 22vh;
+    padding: 10px;
+  }
+  .subcontainer .notesImage {
+    height: 55%;
+  }
+  .subcontainer .notesText {
+    font-size: 0.8rem;
+    margin-top: 6px;
+  }
+  .subcontainer .Note-Date {
+    font-size: 0.75rem;
+    padding: 3px 5px;
+  }
+  .subcontainer .notesText button {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    min-width: 50px;
+  }
+}
+
+/* Image loading animation */
+.subcontainer .notesImage img {
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
