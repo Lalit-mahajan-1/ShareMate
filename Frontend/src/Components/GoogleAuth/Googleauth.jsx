@@ -47,12 +47,13 @@ const Googleauth = () => {
   const handlegooglelogin = async (decode) => {
     try {
       const { email, name, sub: googleId } = decode;
+       
+      console.log(`${import.meta.env.VITE_SERVR_URL}/user/google-login`)
       await axios.post(
         `${import.meta.env.VITE_SERVR_URL}/user/google-login`,
         { email, name, googleId },
         { withCredentials: true }
       );
-
       const res = await axios.get(`${import.meta.env.VITE_SERVR_URL}/me`, {
         withCredentials: true,
       });
