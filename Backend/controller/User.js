@@ -41,7 +41,7 @@ export const create = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       maxAge: time * 1000,
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV==="production"?"None":"lax" ,
       secure: process.env.NODE_ENV === "production"
     });
 
@@ -63,7 +63,7 @@ export const login = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       maxAge: time * 1000,
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV==="production"?"None":"lax",
       secure: process.env.NODE_ENV === "production"
     });
 
@@ -76,7 +76,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("jwt", { httpOnly: true, sameSite: "lax",secure: true  });
+    res.clearCookie("jwt", { httpOnly: true, sameSite: process.env.NODE_ENV==="production"?"None":"lax",secure: true  });
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     return res.status(500).json({ message: "Logout failed", error });
@@ -98,11 +98,9 @@ export const googleLogin = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       maxAge: time * 1000,
-      sameSite: "lax",
+      sameSite:process.env.NODE_ENV==="production"?"None":"lax",
       secure: process.env.NODE_ENV === "production"
     });
-
-console.log("finished")
     res.status(200).json({ message: "Success" });
   } catch (error) {
     res.status(400).json({ message: "Google login failed", error });

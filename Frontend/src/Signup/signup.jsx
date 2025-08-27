@@ -102,7 +102,7 @@ const Signup = () => {
             Sign Up
           </button>
           <div className="google-btn">
-            <Googleauth/>
+            <Googleauth />
           </div>
         </form>
 
