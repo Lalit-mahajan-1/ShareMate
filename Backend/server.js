@@ -66,11 +66,12 @@ app.get("/me", requireAuth, async (req, res) => {
   }
 });
 
+
 app.get("/isLogedIn",requireAuth,async(req,res)=>{
   try{
-   const user = await User.findById(req.userId);
-   const isLogedIn = user?true:false;
-   res.json({isLogedIn});
+    const user = await User.findById(req.userId);
+    const isLogedIn = user?true:false;
+    res.json({isLogedIn});
   }
   catch(err){
     res.status(500).json({ error: "Failed to fetch user info" });
@@ -78,4 +79,10 @@ app.get("/isLogedIn",requireAuth,async(req,res)=>{
 })
 app.use("/user",userroutes)
 app.use("/History",historyroutes)
+
+
+app.all('*', (req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
 
