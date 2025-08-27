@@ -10,13 +10,49 @@ import cookieParser from 'cookie-parser';
 import requireAuth from './middleware/auth.js'
 import User from './model/usermodel.js';
 const app = express()
-app.use(bodyparser.json());
 dotenv.config({quiet:true});
+
+app.use(bodyparser.json());
 app.use(cors({
-  origin: [process.env.LOCAL_URL,process.env.FRONTEND_URL],
-  credentials: true
+  origin: function (origin, callback) {
+    console.log('Request origin:', origin); 
+ 
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      process.env.LOCAL_URL,
+      process.env.FRONTEND_URL,
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://localhost:5174', 
+    ].filter(Boolean); 
+    
+    console.log('Allowed origins:', allowedOrigins); 
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('Origin not allowed:', origin);
+      callback(null, true); 
+    
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  exposedHeaders: ['Set-Cookie']
 }));
+
+app.options('*', cors());
+
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
+  next();
+});
 app.use(cookieParser())
+
+
 const PORT = process.env.PORT || 7000;
 const MONGOURL = process.env.MONGO_URL;
 
