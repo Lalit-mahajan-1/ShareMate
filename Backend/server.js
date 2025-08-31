@@ -5,12 +5,13 @@ import mongoose from 'mongoose';
 import noteroutes from "./routes/Notes.js"
 import userroutes from "./routes/User.js"
 import historyroutes from "./routes/Noteshistory.js"
+import ProfileImageroutes from "./routes/userimage.js"
 import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import requireAuth from './middleware/auth.js'
 import User from './model/usermodel.js';
 const app = express()
-dotenv.config({quiet:true});
+dotenv.config({quiet:true,override: true});
 
 app.use(bodyparser.json());
 const allowedOrigins = [
@@ -31,8 +32,8 @@ app.use(cors({
   },
   credentials: true
 }));
-
-
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
   res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
@@ -79,7 +80,7 @@ app.get("/isLogedIn",requireAuth,async(req,res)=>{
 app.use("/Notes",requireAuth,noteroutes)
 app.use("/user",userroutes)
 app.use("/History",historyroutes)
-
+app.use("/ProfileImage",ProfileImageroutes)
 
 app.all('/*splat', (req, res) => {
   res.status(404).json({ message: "Route not found" });

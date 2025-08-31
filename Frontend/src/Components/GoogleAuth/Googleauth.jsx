@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
 import { AppContext } from '../Navbar/UserInfo';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from "react-toastify";
 const Googleauth = () => {
   const { setUser } = useContext(AppContext);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const googleBtnStyles = {
     button: {
@@ -14,12 +14,12 @@ const Googleauth = () => {
       alignItems: "center",
       justifyContent: "center",
       gap: "10px",
-      padding: "14px 16px", 
+      padding: "14px 16px",
       fontSize: "16px",
       fontWeight: "500",
       cursor: "pointer",
-      borderRadius: "8px", 
-      border: "1px solid #bfdbfe", 
+      borderRadius: "8px",
+      border: "1px solid #bfdbfe",
       width: "100%",
       background: "#fff",
       boxShadow: "0px 3px 6px rgba(0,0,0,0.1)",
@@ -41,13 +41,10 @@ const Googleauth = () => {
     }
   };
 
-
-
-
   const handlegooglelogin = async (decode) => {
     try {
       const { email, name, sub: googleId } = decode;
-       
+
       console.log(`${import.meta.env.VITE_SERVR_URL}/user/google-login`)
       await axios.post(
         `${import.meta.env.VITE_SERVR_URL}/user/google-login`,
@@ -61,7 +58,11 @@ const Googleauth = () => {
       setUser(res.data);
       navigate("/");
     } catch (error) {
-      console.log("Login error:", error);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
     }
   };
 
@@ -83,15 +84,15 @@ const Googleauth = () => {
     onError: (error) => console.log("Google login error:", error),
   });
 
-  return (
+  return <>
     <div className="google-btn">
       <button onClick={handleLogin} style={googleBtnStyles.button}>
         <i className="fa-brands fa-google" style={googleBtnStyles.icon}></i>
         <span style={googleBtnStyles.text}>Sign in with Google</span>
       </button>
     </div>
-
-  );
+    <ToastContainer />
+  </>
 };
 
 export default Googleauth;

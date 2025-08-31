@@ -4,29 +4,42 @@ import "./UserCard.css";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import MonitorIcon from '@mui/icons-material/Monitor';
+import axios from "axios";
 const UserCard = () => {
   const { user } = useContext(AppContext);
   const [avatar, setAvatar] = useState("/UserImage.png");
-  useEffect(()=>{
-    const fetchData = async () =>{
-       if(localStorage.getItem('UserImageURL' )!==null){
-        setAvatar(localStorage.getItem('UserImageURL'))
-       }
+   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_SERVR_URL}/ProfileImage/${user.id}`, { withCredentials: true });
+        if (res.data?.ProfURL) {
+          setAvatar(res.data.ProfURL);
+        }
+      } catch (err) {
+        setAvatar(err.response.data)
+      }
+    };
+    if (user?.id) {
+      fetchData();
     }
-    fetchData();
-  },[])
 
-  const handleImageChange = (e) => {
+  }, [user])
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file && file.type === "image/png") {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setAvatar(event.target.result);
-        localStorage.setItem("UserImageURL",`${event.target.result}`)
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert("Please select a PNG image.");
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESENT);
+      const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`,
+        formData
+      );
+      await axios.put(`${import.meta.env.VITE_SERVR_URL}/ProfileImage/${user.id}`, {
+        UserId: user.id,
+        ProfURL: res.data.secure_url
+      }, { withCredentials: true });
+
+      setAvatar(res.data.secure_url);
     }
   };
 
@@ -49,13 +62,13 @@ const UserCard = () => {
       <div className="user-info">
         <h2 className="user-name">{user?.name || "Unknown User"}</h2>
         <p className="user-email">
-          <MailOutlineIcon style={{color:'red'}}/> {user?.email || "Not Provided"}
+          <MailOutlineIcon style={{ color: 'red' }} /> {user?.email || "Not Provided"}
         </p>
         <p className="user-browser">
-          <MonitorIcon/> {user?.UserBrowser}
+          <MonitorIcon /> {user?.UserBrowser}
         </p>
         <p className="user-login">
-          <AccessTimeIcon/> Last Login: {user?.Date}
+          <AccessTimeIcon /> Last Login: {user?.Date}
         </p>
       </div>
     </div>

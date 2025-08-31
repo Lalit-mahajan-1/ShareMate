@@ -1,7 +1,8 @@
 import Note from "../model/notesmodel.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({path: 
+['.env.local', '.env'],quiet: true});
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -18,10 +19,10 @@ export const create = async (req, res) => {
 
     const base64 = req.file.buffer.toString("base64");
     const dataUri = `data:${req.file.mimetype};base64,${base64}`;
-
-    const result = await cloudinary.uploader.upload(dataUri, {
+    const result = await cloudinary.uploader.upload(dataUri,{
       folder: "ShareMate",
       resource_type: "image",
+      format:'png',
       public_id: `${req.userId}_${req.file.originalname}_${Date.now()}`,
     });
     const ImgURL = result.secure_url;
@@ -60,6 +61,7 @@ export const deleteNote = async (req, res) => {
       return res.status(404).json({ message: "Note not found" });
     }
     let publicId = NotesExist.ImgURL.split("ShareMate/")[1]; 
+    publicId = (publicId.slice(0,-4))
 
     publicId = `ShareMate/${publicId.split(".")[0]}.${publicId.split(".")[1]}`; 
     await cloudinary.uploader

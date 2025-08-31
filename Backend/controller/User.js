@@ -84,16 +84,17 @@ export const logout = async (req, res) => {
 };
 
 export const googleLogin = async (req, res) => {
-  console.log("hit")
+
   try {
     const { email, name ,googleId} = req.body;
     let user = await User.findOne({ email: email });
-    console.log(user)
+
     if (!user) {
       user = new User({ name, email ,googleId });
       await user.save();
     }
-    console.log("token")
+
+    if(user.googleId){
     const token = createToken(user._id);
     res.cookie("jwt", token, {
       httpOnly: true,
@@ -102,6 +103,10 @@ export const googleLogin = async (req, res) => {
       secure: process.env.NODE_ENV === "production"
     });
     res.status(200).json({ message: "Success" });
+  }
+   else{
+    res.status(400).json({message:"USER Already Exist"})
+   }
   } catch (error) {
     res.status(400).json({ message: "Google login failed", error });
   }

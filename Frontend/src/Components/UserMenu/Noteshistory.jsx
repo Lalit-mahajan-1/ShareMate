@@ -23,7 +23,6 @@ const Noteshistory = () => {
 
     fetchData();
   }, [user]); 
-  console.log((history))
 
   return (
     <div className="history-container">

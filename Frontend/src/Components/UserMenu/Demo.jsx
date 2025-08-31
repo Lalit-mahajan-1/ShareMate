@@ -7,11 +7,10 @@ import Avatar from '@mui/material/Avatar';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../Navbar/UserInfo';
 import HomeIcon from '@mui/icons-material/Home';
-
+import axios from 'axios';
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -59,8 +58,9 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CustomizedMenus({ OnLogout }) {
-
+  const [avatar, setAvatar] = React.useState("/UserImage.png");
   const{user,setUser} = React.useContext(AppContext)
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -69,15 +69,27 @@ export default function CustomizedMenus({ OnLogout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+   React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_SERVR_URL}/ProfileImage/${user.id}`, { withCredentials: true });
+        if (res.data?.ProfURL) {
+          setAvatar(res.data.ProfURL);
+        }
+      } catch (err) {
+        setAvatar(err.response.data)
+      }
+    };
+    if (user?.id) {
+      fetchData();
+    }
 
+  }, [])
   return (
     <div>
-   
         {
-          localStorage.getItem('UserImageURL')?<Avatar  style ={{cursor:'pointer'}} sx ={{ml:'0.1rem',mt:'0.1rem'}}alt="Remy Sharp" src={localStorage.getItem('UserImageURL')} onClick={handleClick} />:
-          <Avatar  style ={{cursor:'pointer'}} sx ={{ml:'0.1rem',mt:'0.1rem'}}alt="Remy Sharp" src="/UserImage.png" onClick={handleClick} />
+         <Avatar  style ={{cursor:'pointer'}} sx ={{ml:'0.1rem',mt:'0.1rem'}}alt="Remy Sharp" src={avatar} onClick={handleClick} />
         }
-      
 
 
       <StyledMenu
