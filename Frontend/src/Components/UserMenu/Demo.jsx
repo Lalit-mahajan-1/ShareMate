@@ -84,7 +84,7 @@ export default function CustomizedMenus({ OnLogout }) {
       fetchData();
     }
 
-  }, [])
+  }, [user])
   return (
     <div>
         {
