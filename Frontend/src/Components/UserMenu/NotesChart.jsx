@@ -32,12 +32,19 @@ export default function NotesChart() {
                 const days = res.data.map((data) => {
                     let s = data.ImgURL;
                     let ans = Number([...([...s].reverse().join("").substr(0,17))].reverse().join("").substr(0,13))
-                    return new Date(ans).getDate();
-                });
-                for (let i = 0; i < days.length; i++) {
-                    yvalue[days[i] - 1]++;
-                }
 
+                    if(new Date(ans).getMonth()==CurrMonth){
+                    return new Date(ans).getDate();
+                    }
+                    else{
+                        return 0 ; 
+                    }
+                });
+                console.log(days)
+                for (let i = 0; i < days.length; i++) {
+                    if(days[i]-1>=0){
+                    yvalue[days[i] - 1]++;}
+                }
                 setNoteCount(days.length);
                 setXLabels(arr);
                 setPdata(yvalue);
