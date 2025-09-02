@@ -1,5 +1,4 @@
-import React from 'react'
-import { Page, Text, View, Document, Image, StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import { Page, Text, View, Document, Image, StyleSheet,  PDFDownloadLink } from '@react-pdf/renderer';
 import random from 'random-string-generator'
 const styles = StyleSheet.create({
     page: {
@@ -28,17 +27,13 @@ const styles = StyleSheet.create({
 
 
 const MyDocument = ({ allnotes }) => (
-
     <Document >{
-        allnotes.map((note, index) => {
-            const s = note.ImgURL
-            const ans = Number([...([...s].reverse().join("").substr(0,17))].reverse().join("").substr(0,13))
-            
+        allnotes.map((note, index) => {        
             return (
-            <Page key={index} size="A4" style={styles.page}>
+            <Page key={index} size="A4" style={[styles.page]}>
                 <View style={styles.section}>
                     <Text style={styles.date}>
-                        {new Date(ans).toDateString()}
+                        {note.title}
                     </Text>
                 </View>
 

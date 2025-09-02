@@ -16,6 +16,10 @@ const NotesHistorySchema = new mongoose.Schema({
    Action :{
     type:String,
     required:true
+   },
+   title:{
+    type: String,
+    required:true,
    }
     
 });

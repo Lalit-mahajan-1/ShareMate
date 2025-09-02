@@ -12,7 +12,7 @@ cloudinary.config({
 
 export const create = async (req, res) => {
   try {
-    const { Notes, theme } = req.body;
+    const { Notes, theme,title } = req.body;
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
@@ -31,6 +31,7 @@ export const create = async (req, res) => {
       ImgURL,
       createdBy: req.userId,
       theme,
+      title
     });
     await newNotes.save();
 

@@ -22,7 +22,8 @@ const Uploadfile = () => {
   const NotesByUser = {
     Notes: "",
     ImgURL: "",
-    theme:"#fff"
+    theme:"#fff",
+    title:""
   };
   const [Notes, setNotes] = useState(NotesByUser);
   const [load, setLoad] = useState(false);
@@ -80,6 +81,7 @@ const Uploadfile = () => {
       formData.append("file", file);
       formData.append("Notes", Notes.Notes);
       formData.append("theme", Notes.theme);
+      formData.append("title", Notes.title);
       try {
         const res = await axios.post(
           `${import.meta.env.VITE_SERVR_URL}/Notes/upload`,
@@ -137,7 +139,16 @@ const Uploadfile = () => {
               </button>
               <button className="submit" type="submit">Submit</button>
             </div>
-
+              
+            <input
+            type="text" 
+            placeholder="Enter title of note ...." 
+            id = "title"
+            name = "title"
+            style={{font:"caption",fontFamily:'none'}}
+            value={Notes.title}
+            onChange={(e) => setNotes((prev) => ({ ...prev, title: e.target.value }))}
+            />
             <textarea
               type="text"
               id="Note"

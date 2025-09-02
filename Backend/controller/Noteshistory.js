@@ -1,9 +1,12 @@
 import noteshistorymodel from "../model/noteshistorymodel.js";
-
+import notesmodel from "../model/notesmodel.js";
 export const create = async(req,res) =>{
       const {UserId,ImgURL,Action} = req.body;
+      const note = await notesmodel.findOne({_id:ImgURL})
+      const title = note.title;
+      console.log(title)
       try{
-        const newHistory = new noteshistorymodel({UserId,ImgURL,Action,Date:new Date().toLocaleString()})
+        const newHistory = new noteshistorymodel({UserId,title,ImgURL,Action,Date:new Date().toLocaleString()})
         await newHistory.save();
         res.status(201).json({message:"History Updated"})                                   
     }

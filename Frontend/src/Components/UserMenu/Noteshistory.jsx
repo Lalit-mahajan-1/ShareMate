@@ -31,7 +31,7 @@ const Noteshistory = () => {
           <div className="history-content">
             <p className="history-date">{h.Date}</p>
             <p className="history-action">{h.Action}</p>
-            <p className="history-img" >{h.ImgURL}</p>   
+            <p className="history-img" >{h.title}</p>   
           </div>
         </div>
       ))}

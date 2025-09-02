@@ -165,9 +165,6 @@ const GetallNotes = () => {
 
             <div className="container">
                 {notes.map((note, index) => {
-                    const s = note.ImgURL;
-                    const ans = Number([...([...s].reverse().join("").substr(0,17))].reverse().join("").substr(0,13))
-
                     return (
                         <div
                             className="subcontainer"
@@ -175,7 +172,7 @@ const GetallNotes = () => {
                             style={{ backgroundColor: note.theme }}
                         >
                             <div className="Note-Date">
-                                {new Date(ans).toDateString()}
+                                {note.title}
                                 {!ExSelect && (
                                     <Checkbox
                                         checked={!!selectdNotes[note._id]}
@@ -239,13 +236,16 @@ const GetallNotes = () => {
                     maxZoomPixelRatio: 6,
                 }}
                 slides={notes.map((note) => {
-                    const timestamp = Number(note.ImgURL.substr(8, 13)) || Date.now();
                     return {
-                        src: `${note.ImgURL}`,
+                        src: note.ImgURL,
                         description: note.Notes,
-                        title: `Notes of ${new Date(timestamp).toDateString()}`,
+                        title: note.title,
                     };
                 })}
+                carousel={{
+                    finite: true
+                }
+                }
             />
         </div>
     );
