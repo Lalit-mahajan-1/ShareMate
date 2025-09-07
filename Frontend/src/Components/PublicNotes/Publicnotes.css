@@ -3,8 +3,9 @@
   margin: 20px auto;
   padding: 0 15px;
   display: grid;
-  grid-template-columns: 1fr; /* default = mobile view */
+  grid-template-columns: 1fr; 
   gap: 20px;
+  align-items: start;
 }
 
 .loading,
@@ -77,6 +78,10 @@
 .note-description .MuiAccordionDetails-root {
   color: #444;
   line-height: 1.6;
+}
+.note-description pre {
+  white-space: pre-wrap;  
+  word-wrap: break-word;   
 }
 
 @media (min-width: 768px) {

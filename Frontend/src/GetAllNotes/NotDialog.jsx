@@ -68,16 +68,8 @@ export default function CustomizedDialogs({ Notes ,Id,onUpdate}) {
                 </DialogTitle>
 
                 <DialogContent dividers>
-                    <Typography
-                        gutterBottom
-                        sx={{
-                            fontSize: '1rem',
-                            color: '#333',
-                            lineHeight: 1.6
-                        }}
-                    >
-                        {Notes}
-                    </Typography>
+                   
+                  <pre style={{whiteSpace:'pre-wrap',wordWrap:'break-word',fontFamily:'initial'}} >{Notes}</pre>
                 </DialogContent>
                 <UpdateDialog Id={Id} Note={Notes} onSave={onUpdate} />
                 
