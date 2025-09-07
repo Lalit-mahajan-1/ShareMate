@@ -1,0 +1,70 @@
+.viewnotes-page {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: #ffffff;
+  color: #222;
+  min-height: 100vh;
+}
+
+.viewnotes-container {
+  max-width: 750px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.author-section {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
+}
+
+.author-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Blog style */
+.note-blog {
+  line-height: 1.8;
+}
+
+.note-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  color: #111;
+}
+
+.note-content {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #333;
+  white-space: pre-line; /* keeps formatting if you have line breaks */
+}
+
+.note-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .note-title {
+    font-size: 1.6rem;
+  }
+
+  .note-content {
+    font-size: 1rem;
+  }
+}

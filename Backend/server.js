@@ -10,6 +10,7 @@ import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import requireAuth from './middleware/auth.js'
 import User from './model/usermodel.js';
+import Renderroute from './routes/RenderNotes.js';
 const app = express()
 dotenv.config({quiet:true,override: true});
 
@@ -81,7 +82,7 @@ app.use("/Notes",requireAuth,noteroutes)
 app.use("/user",userroutes)
 app.use("/History",historyroutes)
 app.use("/ProfileImage",ProfileImageroutes)
-
+app.use("/view",Renderroute)
 app.all('/*splat', (req, res) => {
   res.status(404).json({ message: "Route not found" });
 });

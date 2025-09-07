@@ -1,0 +1,22 @@
+.visibility-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.visibility-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.msg {
+  font-size: 14px;
+  color: #555;
+  margin-top: 8px;
+}
+
+.btn {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}

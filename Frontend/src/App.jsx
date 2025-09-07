@@ -11,6 +11,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useEffect,useState } from 'react';
 import { Navigate } from "react-router-dom";
 import axios from 'axios';
+import Viewnotes from './Components/Viewnotes/Viewnotes.jsx';
+import Publicnotes from './Components/PublicNotes/Publicnotes.jsx';
 
 function App() {
   const cliendId = import.meta.env.VITE_CLIENT_ID;
@@ -49,6 +51,14 @@ function App() {
     {
       path: "/user/Dashboard/:userId",
       element: <Dashboard />
+    },
+    {
+      path:"/view/:userid/:notesid",
+      element:<Viewnotes/>
+    },
+    {
+      path:"/view/publicnotes",
+      element:<Publicnotes/>
     }
   ]);
 

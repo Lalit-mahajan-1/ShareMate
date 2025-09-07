@@ -37,6 +37,9 @@ const Navbar = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
+                <Link to="/view/publicnotes" >Public Notes</Link>
+              </li>
+              <li>
                 <Link to="/Notes/Upload">Upload</Link>
               </li>
               <li>
@@ -50,6 +53,9 @@ const Navbar = () => {
             <>
               <li>
                 <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/view/publicnotes">Public Notes</Link>
               </li>
               <li>
                 <Link to="/user/Signup">Sign Up</Link>

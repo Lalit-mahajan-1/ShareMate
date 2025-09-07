@@ -10,7 +10,7 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
-import './getallusers.css';
+import './CSS/getallusers.css';
 import CustomizedDialogs from './NotDialog';
 import DeleteDialog from './DeleteDialog';
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,8 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Checkbox from '@mui/material/Checkbox';
 import Downloaddialog from './Downloaddialog';
+import Sharemodal from './Sharemodal';
+
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -75,6 +77,7 @@ const StyledMenu = styled((props) => (
 
 const GetallNotes = () => {
     const [notes, setNotes] = useState([]);
+    const [user, setUser] = useState(null);
     const [open, setOpen] = useState(false);
     const [Index, setIndex] = useState(0);
     const [ExSelect, setExSelect] = useState(true)
@@ -108,6 +111,7 @@ const GetallNotes = () => {
                 const res = await axios.get(`${import.meta.env.VITE_SERVR_URL}/me`, {
                     withCredentials: true,
                 });
+                setUser(res.data)
                 try {
                     const response = await axios.get(`${import.meta.env.VITE_SERVR_URL}/Notes/AllNotes/${res.data.id}`, { withCredentials: true })
                     setNotes(response.data);
@@ -218,6 +222,7 @@ const GetallNotes = () => {
                                     Id={note._id}
                                     onDelete={handleNoteDeleted}
                                 />
+                                <Sharemodal shareurl={`${import.meta.env.VITE_FRONTEND_URL}/view/${user.id}/${note._id}`} notesid={note._id}/>
                             </div>
                         </div>
                     );

@@ -42,7 +42,8 @@ export const create = async (req, res) => {
       httpOnly: true,
       maxAge: time * 1000,
       sameSite: process.env.NODE_ENV==="production"?"None":"lax" ,
-      secure: process.env.NODE_ENV === "production"
+      secure: process.env.NODE_ENV === "production",
+      domain:".vercel.app"
     });
 
     await newUser.save();

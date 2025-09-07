@@ -1,0 +1,92 @@
+.publicnotes-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+  display: grid;
+  grid-template-columns: 1fr; /* default = mobile view */
+  gap: 20px;
+}
+
+.loading,
+.no-notes {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin-top: 40px;
+}
+
+.note-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+.note-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 10px 0;
+}
+
+.note-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.note-description .MuiAccordion-root {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.note-description .MuiAccordionSummary-root {
+  font-weight: 500;
+}
+
+.note-description .MuiAccordionDetails-root {
+  color: #444;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .publicnotes-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .publicnotes-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

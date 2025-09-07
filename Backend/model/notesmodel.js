@@ -21,6 +21,11 @@ const NotesSchema = new mongoose.Schema({
     type:String,
     default:'#fff'
   },
+  visibility:{
+    type:String,
+    enum:['private','public'],
+    default:'private'
+  },
     visitHistory : [{timestamp:{type:Number}}]
 });
 
