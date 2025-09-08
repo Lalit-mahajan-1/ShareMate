@@ -70,9 +70,8 @@ const Uploadfile = () => {
     e.preventDefault();
     if (!file) {
       toast.error("No File Selected!", {
-        position: "top-center",
+        position: "bottom-left",
         autoClose: 3000,
-        theme: "dark",
         transition: Bounce,
       });
       return;
@@ -88,9 +87,8 @@ const Uploadfile = () => {
           formData,{withCredentials:true}
         );
         toast.success("Upload successful!", {
-          position: "top-center",
+          position: "bottom-left",
           autoClose: 3000,
-          theme: "dark",
         });
 
         try{
@@ -103,9 +101,8 @@ const Uploadfile = () => {
       } catch (err) {
         if(err.status === 401){
           toast.error("Please Signup", {
-          position: "top-center",
+          position: "bottom-left",
           autoClose: 3000,
-          theme: "dark",
         });
         }    
       }
