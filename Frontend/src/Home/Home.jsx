@@ -1,8 +1,10 @@
 import Navbar from '../Components/Navbar/Navbar'
 import GradientText from './Animations/GradientText'
 import './Home.css'
-import { red } from '@mui/material/colors';
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
@@ -20,7 +22,7 @@ const Home = () => {
           <p>
             Whether personal or professional, your notes are always secure.
           </p>
-          <button className="home-btn">Start Now</button>
+          <button className="home-btn" onClick={()=>navigate("/user/Signup")}>Start Now</button>
         </div>
         <div className="home-image">
           <img src="/HomePageImage.png" alt="Homepage" />

@@ -1,210 +1,189 @@
+/* --- getallusers.css --- */
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-  font-family: 'Inter', Arial, sans-serif;
-  background: #f5f5f5;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f5f5f5;
 }
 
 .container {
-  min-height: 100vh;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 80px 16px 32px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 16px 32px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /* Reduced gap for tighter, cleaner look */
+    gap: 15px; 
 }
-.allnotes-btn{
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 2vh;
-  margin-right: 20vw;
+
+.allnotes-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 2vh;
+    margin-right: 20vw;
 }
+
+/* Base style for all note containers (3 cards per row on large screens) */
 .subcontainer {
-  display: flex;
-  flex-direction: column;
-  width: 30vw;
-  min-height: 28vh;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
-  padding: 12px;
-  transition: transform 0.2s ease;
-  cursor: pointer;
-  border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    /* Adjusted width slightly for better fit with reduced gap */
+    width: calc(33.333% - 15px); 
+    min-height: 28vh; /* Uniform height for all cards */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
+    padding: 12px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+    background-color: white; 
 }
 
 .subcontainer:hover {
-  transform: translateY(-3px);
+    transform: translateY(-3px);
+}
+
+/* Specific styling for the 'ADD NOTES' card to ensure equal height and width and center content */
+.add-notes-card {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #1e40af;
+}
+
+.add-notes-card > div {
+    font-weight: 600;
+    margin-top: 5px; 
 }
 
 .subcontainer .notesImage {
-  width: 100%;
-  height: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 6px;
-  background: #f9fafb;
+    width: 100%;
+    height: 150px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #f9fafb;
 }
 
 .subcontainer .notesImage img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
 }
 
 .subcontainer .notesImage:hover img {
-  transform: scale(1.01);
+    transform: scale(1.01);
 }
 
 .subcontainer .notesText {
-  margin-top: 8px;
-  padding: 0 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #1f2a44;
+    margin-top: 8px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1f2a44;
 }
 
+/* Button styles (retained) */
 .subcontainer .notesText button {
-  background: transparent;
-  border: 1px solid #1e40af;
-  color: #1e40af;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-width: 60px;
+    background: transparent;
+    border: 1px solid #1e40af;
+    color: #1e40af;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 60px;
 }
 
 .subcontainer .notesText button:hover {
-  background: #1e40af;
-  color: white;
+    background: #1e40af;
+    color: white;
 }
 
 .subcontainer .notesText button:last-child {
-  border-color: #dc2626;
-  color: #dc2626;
+    border-color: #dc2626;
+    color: #dc2626;
 }
 
 .subcontainer .notesText button:last-child:hover {
-  background: #dc2626;
-  color: white;
+    background: #dc2626;
+    color: white;
 }
 
 .subcontainer .Note-Date {
-  align-self: flex-start;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #1e40af;
-  padding: 4px 6px;
-  margin-bottom: 4px;
-}
-
-.container:empty::after {
-  content: 'No notes available. Upload your first note!';
-  width: 100%;
-  max-width: 360px;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-  color: #6b7280;
-  background: white;
-  border-radius: 8px;
-  border: 1px dashed #d1d5db;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e40af;
+    padding: 4px 0; /* Adjusted padding */
+    margin-bottom: 4px;
 }
 
 /* Responsive Breakpoints */
 @media (max-width: 1200px) {
-  .container {
-    padding: 76px 12px 28px;
-    gap: 16px;
-  }
-  .subcontainer {
-    width: 45vw;
-    min-height: 26vh;
-  }
-  .allnotes-btn{
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 2vh;
-  margin-right: 4vw;
-}
+    .container {
+        gap: 15px;
+    }
+    .subcontainer {
+        /* Two cards per row */
+        width: calc(50% - 15px); 
+        min-height: 26vh;
+    }
+    .allnotes-btn{
+        margin-right: 4vw;
+    }
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 72px 10px 24px;
-    gap: 12px;
-  }
-  .subcontainer {
-    width: 48vw;
-    min-height: 24vh;
-  }
-  .subcontainer .notesText {
-    font-size: 0.85rem;
-  }
-  .subcontainer .Note-Date {
-    font-size: 0.8rem;
-    padding: 3px 5px;
-  }
-  .subcontainer .notesText button {
-    font-size: 0.8rem;
-    padding: 4px 8px;
-    min-width: 55px;
-  }
+    .container {
+        gap: 10px;
+    }
+    .subcontainer {
+        /* Adjusted for smaller screens */
+        width: calc(50% - 10px);
+        min-height: 24vh;
+    }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 68px 8px 20px;
-    gap: 10px;
-  }
-  .subcontainer {
-    width: 92vw;
-    min-height: 22vh;
-    padding: 10px;
-  }
-  .subcontainer .notesImage {
-    height: 55%;
-  }
-  .subcontainer .notesText {
-    font-size: 0.8rem;
-    margin-top: 6px;
-  }
-  .subcontainer .Note-Date {
-    font-size: 0.75rem;
-    padding: 3px 5px;
-  }
-  .subcontainer .notesText button {
-    font-size: 0.75rem;
-    padding: 3px 6px;
-    min-width: 50px;
-  }
+    .container {
+        padding: 68px 8px 20px;
+        gap: 10px;
+    }
+    .subcontainer {
+        /* Single card per row */
+        width: 100%; 
+        min-height: 22vh;
+        padding: 10px;
+    }
 }
 
 .subcontainer .notesImage img {
-  opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+    to { opacity: 1; }
 }

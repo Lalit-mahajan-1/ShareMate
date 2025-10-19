@@ -40,9 +40,6 @@ const Navbar = () => {
                 <Link to="/view/publicnotes" >Public Notes</Link>
               </li>
               <li>
-                <Link to="/Notes/Upload">Upload</Link>
-              </li>
-              <li>
                 <Link to="/Notes/GetAllNotes">View</Link>
               </li>
               <li>

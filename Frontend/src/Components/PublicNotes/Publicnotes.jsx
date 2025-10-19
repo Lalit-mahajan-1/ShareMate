@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Lightbox from "yet-another-react-lightbox";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
@@ -14,12 +9,17 @@ import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "./Publicnotes.css";
+import SideNotes from "../../GetAllNotes/SideNotes";
 
 const Publicnotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [Index, setIndex] = useState(0);
+
+      const handleNoteUpdated = (updatedNote) => {
+        setNotes(prev => prev.map(n => (n._id === updatedNote._id ? updatedNote : n)));
+    };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,18 +71,13 @@ const Publicnotes = () => {
               )}
 
               <div className="note-description">
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                  >
-                    <Typography component="span">View Notes</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography component="pre">{note.Notes}</Typography>
-                  </AccordionDetails>
-                </Accordion>
+                     <SideNotes
+                          Notes={note.Notes}
+                          Id={note._id}
+                          onUpdate={handleNoteUpdated}
+                          Title={note.title}
+                          view = "public"
+                    />
               </div>
             </div>
           ))

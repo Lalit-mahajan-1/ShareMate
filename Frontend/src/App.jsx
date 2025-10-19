@@ -38,11 +38,11 @@ function App() {
 
     {
       path: "/user/Signup",
-      element: !isLogedIn?<Signup />:<Navigate to="/"/>,
+      element: !isLogedIn?<Signup />:<Navigate to="/Notes/GetAllNotes"/>,
     },
     {
       path: "/user/Login",
-      element: !isLogedIn?<Login />:<Navigate to="/"/>,
+      element: !isLogedIn?<Login />:<Navigate to="/Notes/GetAllNotes"/>,
     },
     {
       path: "/",

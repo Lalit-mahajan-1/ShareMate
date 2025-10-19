@@ -1,4 +1,3 @@
-// sidenotes.jsx
 import * as React from "react";
 import {
   Box,
@@ -10,11 +9,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import UpdateNote from "./UpdateNote";
-
-// Define a consistent blue color
 const BLUE_COLOR = '#1976D2';
 
-export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title }) {
+export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title, view }) {
   const [open, setOpen] = React.useState(false);
   const [currentNotes, setCurrentNotes] = React.useState(initialNotes);
 
@@ -44,35 +41,29 @@ export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title }) 
       <Button
         onClick={toggleDrawer(true)}
         variant="outlined" 
-        // 💡 FORCE STYLES: Use the 'style' prop to guarantee the blue color and border color.
         style={{
-          color: BLUE_COLOR, // Force text color
-          borderColor: BLUE_COLOR, // Force border color
-          backgroundColor: 'transparent', // Ensure no fill color
+          color: BLUE_COLOR, 
+          borderColor: BLUE_COLOR, 
+          backgroundColor: 'transparent', 
         }}
-        sx={{
-          // Use sx for hover effects and other properties
-          
+        sx={{  
           '&:hover': {
             backgroundColor: `${BLUE_COLOR}10`, 
             borderColor: BLUE_COLOR, 
             boxShadow: 'none', 
           },
-          
-          // Existing layout/font styles
           borderRadius: 2,
           fontWeight: 600,
-          textTransform: "none", // Prevent ALL CAPS
+          textTransform: "none",
           px: 2,
           py: 1,
         }}
       >
-        {"VIEW NOTES".toUpperCase()}
+        VIEW NOTES
       </Button>
 
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         <Box
-          // Responsive width for mobile screens
           sx={{
             width: {
               xs: '95vw',
@@ -87,7 +78,6 @@ export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title }) 
           }}
           role="presentation"
         >
-          {/* Header */}
           <Box
             sx={{
               display: "flex",
@@ -109,12 +99,11 @@ export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title }) 
           </Box>
 
           <Divider sx={{ mb: 2 }} />
-          
-          {/* UpdateNote component */}
           <UpdateNote 
             Notes={currentNotes} 
             Id={Id} 
             onUpdate={handleNoteUpdate}
+            view = {view}
           />
         </Box>
       </Drawer>

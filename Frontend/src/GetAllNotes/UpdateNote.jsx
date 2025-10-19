@@ -10,7 +10,7 @@ import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import { AppContext } from '../Components/Navbar/UserInfo';
 
-export default function UpdateNote({ Notes, Id, onUpdate }) {
+export default function UpdateNote({ Notes, Id, onUpdate,view }) {
   const [isEditing, setIsEditing] = useState(false);
   const [noteText, setNoteText] = useState(Notes || "");
   const { user } = useContext(AppContext);
@@ -63,8 +63,10 @@ export default function UpdateNote({ Notes, Id, onUpdate }) {
 
   return (
     <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mb: 2 }}>
-        {!isEditing ? (
+      {
+        view === "private" ? (
+         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mb: 2 }}>
+        {!isEditing ?(
           <Button 
             variant="outlined" 
             onClick={() => setIsEditing(true)}
@@ -92,7 +94,10 @@ export default function UpdateNote({ Notes, Id, onUpdate }) {
             </Button>
           </>
         )}
-      </Box>
+      </Box>):(<></>)
+      }
+
+
 
       {!isEditing ? (
         <Typography

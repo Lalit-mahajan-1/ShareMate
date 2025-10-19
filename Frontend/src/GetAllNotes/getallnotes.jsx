@@ -10,7 +10,6 @@ import "yet-another-react-lightbox/plugins/captions.css";
 import Download from "yet-another-react-lightbox/plugins/download";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import './CSS/getallusers.css';
-import CustomizedDialogs from './NotDialog';
 import DeleteDialog from './DeleteDialog';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../Components/Navbar/Navbar';
@@ -26,6 +25,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Downloaddialog from './Downloaddialog';
 import Sharemodal from './Sharemodal';
 import SideNotes from './SideNotes';
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -167,6 +167,15 @@ const GetallNotes = () => {
             </div>
 
             <div className="container">
+                <div className="subcontainer add-notes-card" >
+                    <AddCircleOutlinedIcon
+                    sx = {
+                        { fontSize: 100, cursor: 'pointer',color:"black" } }
+                        onClick={()=>navigate('/notes/upload')}
+                    />
+                    <div >ADD NOTES</div>
+                </div>
+
                 {notes.map((note, index) => {
                     return (
                         <div
@@ -211,23 +220,19 @@ const GetallNotes = () => {
                             </div>
 
                             <div className="notesText">
-                               <SideNotes
-                                   Notes={note.Notes}
-                                   Id={note._id}
-                                   onUpdate={handleNoteUpdated}
-                                   Title={note.title}
-                               />
-                                {/* <CustomizedDialogs
+                                <SideNotes
                                     Notes={note.Notes}
                                     Id={note._id}
                                     onUpdate={handleNoteUpdated}
-                                /> */}
+                                    Title={note.title}
+                                    view="private"
+                                />
                                 <DeleteDialog
                                     Notes={note.Notes}
                                     Id={note._id}
                                     onDelete={handleNoteDeleted}
                                 />
-                                <Sharemodal shareurl={`${import.meta.env.VITE_FRONTEND_URL}/view/${user.id}/${note._id}`} notesid={note._id}/>
+                                <Sharemodal shareurl={`${import.meta.env.VITE_FRONTEND_URL}/view/${user.id}/${note._id}`} notesid={note._id} />
                             </div>
                         </div>
                     );
