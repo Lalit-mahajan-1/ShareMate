@@ -25,7 +25,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Checkbox from '@mui/material/Checkbox';
 import Downloaddialog from './Downloaddialog';
 import Sharemodal from './Sharemodal';
-
+import SideNotes from './SideNotes';
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -211,11 +211,17 @@ const GetallNotes = () => {
                             </div>
 
                             <div className="notesText">
-                                <CustomizedDialogs
+                               <SideNotes
+                                   Notes={note.Notes}
+                                   Id={note._id}
+                                   onUpdate={handleNoteUpdated}
+                                   Title={note.title}
+                               />
+                                {/* <CustomizedDialogs
                                     Notes={note.Notes}
                                     Id={note._id}
                                     onUpdate={handleNoteUpdated}
-                                />
+                                /> */}
                                 <DeleteDialog
                                     Notes={note.Notes}
                                     Id={note._id}
