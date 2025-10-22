@@ -9,18 +9,19 @@ import {
 import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import { AppContext } from '../Components/Navbar/UserInfo';
+import RichTextEditor from "../Components/TextEditor/RichTextEditor";
 
-export default function UpdateNote({ Notes, Id, onUpdate,view }) {
+export default function UpdateNote({ Notes, Id, onUpdate, view }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [noteText, setNoteText] = useState(Notes || "");
+  const [noteText, setNoteText] = useState(Notes || "<p></p>");
   const { user } = useContext(AppContext);
 
   useEffect(() => {
-    setNoteText(Notes || "");
+    setNoteText(Notes || "<p></p>");
   }, [Notes]);
 
   const handleCancel = () => {
-    setNoteText(Notes || "");
+    setNoteText(Notes || "<p></p>");
     setIsEditing(false);
   };
 
@@ -61,98 +62,71 @@ export default function UpdateNote({ Notes, Id, onUpdate,view }) {
     }
   };
 
+  const handleRichTextChange = (html) => {
+    setNoteText(html);
+  };
+
   return (
     <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-      {
-        view === "private" ? (
-         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mb: 2 }}>
-        {!isEditing ?(
-          <Button 
-            variant="outlined" 
-            onClick={() => setIsEditing(true)}
-            sx={{ textTransform: 'none' }} 
-          >
-            Edit Note
-          </Button>
-        ) : (
-          <>
+      {view === "private" ? (
+        <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1, mb: 2 }}>
+          {!isEditing ? (
             <Button 
               variant="outlined" 
-              color="error" 
-              onClick={handleCancel}
+              onClick={() => setIsEditing(true)}
               sx={{ textTransform: 'none' }} 
             >
-              Cancel
+              Edit Note
             </Button>
-            <Button 
-              variant="contained" 
-              color="primary" 
-              onClick={handleSave}
-              sx={{ textTransform: 'none' }} 
-            >
-              Save Changes
-            </Button>
-          </>
-        )}
-      </Box>):(<></>)
-      }
-
-
+          ) : (
+            <>
+              <Button 
+                variant="outlined" 
+                color="error" 
+                onClick={handleCancel}
+                sx={{ textTransform: 'none' }} 
+              >
+                Cancel
+              </Button>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                onClick={handleSave}
+                sx={{ textTransform: 'none' }} 
+              >
+                Save Changes
+              </Button>
+            </>
+          )}
+        </Box>
+      ) : (
+        <></>
+      )}
 
       {!isEditing ? (
-        <Typography
-          component="pre"
+        <Box
           sx={{
-            whiteSpace: "pre-wrap",
+            "& p": { margin: "0.5em 0" },
+            "& h1": { fontSize: "2em", fontWeight: "bold", margin: "0.67em 0" },
+            "& h2": { fontSize: "1.5em", fontWeight: "bold", margin: "0.75em 0" },
+            "& ul": { paddingLeft: "2em", margin: "0.5em 0" },
+            "& ol": { paddingLeft: "2em", margin: "0.5em 0" },
+            "& li": { margin: "0.25em 0" },
+            "& strong": { fontWeight: "bold" },
+            "& em": { fontStyle: "italic" },
+            "& s": { textDecoration: "line-through" },
             wordBreak: "break-word",
-            fontFamily: "inherit",
             lineHeight: 1.6,
           }}
-        >
-          {noteText} 
-        </Typography>
-      ) : (
-        <Typography
-        component="pre"
-          sx={{
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-            fontFamily: "inherit",
-            lineHeight: 1.6,
-          }}
-          >
-        <TextField
-          multiline
-          fullWidth
-          minRows={10}
-          autoFocus
-          value={noteText}
-          onChange={(e) => setNoteText(e.target.value)}
-          variant="standard"
-          InputProps={{
-            disableUnderline: true,
-            sx: {
-              "& .MuiInputBase-input": {
-                border: 'none !important',
-                outline: 'none !important',
-                boxShadow: 'none !important',
-                p: 0, 
-                minHeight: '200px', 
-              },
-              "&::before": { borderBottom: 'none !important' },
-              "&::after": { borderBottom: 'none !important' },
-              "&:hover:not(.Mui-disabled):before": { borderBottom: 'none !important' },
-
-              "&.Mui-focused": {
-                  boxShadow: 'none !important',
-                  border: 'none !important',
-                  outline: 'none !important',
-              },
-            }
-          }}
-
+          dangerouslySetInnerHTML={{ __html: noteText }}
         />
-        </Typography>
+      ) : (
+        <Box sx={{ mt: 2 }}>
+          <RichTextEditor
+            value={noteText}
+            onChange={handleRichTextChange}
+          />
+        </Box>
       )}
     </Box>
   );

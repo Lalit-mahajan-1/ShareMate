@@ -1,0 +1,89 @@
+/* Neutral editor; blue only for focus ring. Vertical toolbar uses slate/neutral tones. */
+
+:root {
+  --surface: #ffffff;
+  --text-900: #0f172a;
+  --text-600: #475569;
+
+  --border: #dce6f8;
+  --divider: #e6ecf7;
+
+  --toolbar-bg: #f6f8fc;    /* neutral toolbar background */
+  --toolbar-border: #e6ecf5;
+  --ctrl: #334155;          /* button text */
+  --ctrl-hover-bg: #eef2f9; /* subtle hover */
+  --ctrl-active: #4f46e5;   /* preferred accent for editor buttons */
+  --ring: rgba(37, 99, 235, 0.25);  /* blue focus ring only */
+}
+
+.rte-shell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rte-grid {
+  display: grid;
+  grid-template-columns: 1fr 56px; /* editor + vertical toolbar */
+  min-height: 260px;
+}
+
+/* Editor area */
+.editor-content-area {
+  padding: 12px 14px;
+  color: var(--text-900);
+  line-height: 1.6;
+  outline: none;
+  max-height: 460px;
+  overflow: auto;
+  background: var(--surface);
+}
+.editor-content-area:focus-within {
+  box-shadow: inset 0 0 0 2px var(--ring);
+}
+
+/* Toolbar (vertical) */
+.rte-toolbar-vert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px;
+  background: var(--toolbar-bg);
+  border-left: 1px solid var(--divider);
+}
+
+.rte-toolbar-vert button {
+  width: 36px;
+  height: 36px;
+  font-weight: 700;
+  color: var(--ctrl);
+  background: #ffffff;
+  border: 1px solid var(--toolbar-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s, transform .08s, box-shadow .15s;
+}
+.rte-toolbar-vert button:hover {
+  color: #1f2a44;
+  background: var(--ctrl-hover-bg);
+  border-color: #d7deea;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+}
+.rte-toolbar-vert button.is-active {
+  color: #ffffff;
+  background: linear-gradient(180deg, var(--ctrl-active), #4338ca);
+  border-color: #4338ca;
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.25);
+}
+.rte-toolbar-vert button:active { transform: translateY(1px); }
+
+.rte-divider {
+  width: 70%;
+  height: 1px;
+  background: var(--divider);
+  margin: 4px 0;
+}
+
+.custom-editor-area { outline: none; }

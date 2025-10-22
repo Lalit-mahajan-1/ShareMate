@@ -8,7 +8,7 @@ route.get("/:id", async (req, res) => {
     const image = await UserImage.findOne({ UserId: id });
 
     if (!image) {
-      return res.status(404).json("https://res.cloudinary.com/dd7ceanme/image/upload/v1756621054/UserImage_xz4yeg.png");
+      return res.status(202).json("https://res.cloudinary.com/dd7ceanme/image/upload/v1756621054/UserImage_xz4yeg.png");
     }
     res.status(200).json(image);
   } catch (err) {

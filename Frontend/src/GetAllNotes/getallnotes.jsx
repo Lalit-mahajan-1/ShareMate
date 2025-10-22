@@ -167,7 +167,7 @@ const GetallNotes = () => {
             </div>
 
             <div className="container">
-                <div className="subcontainer add-notes-card" >
+                <div className="subcontainer add-notes-card" onClick={()=>navigate('/notes/upload')}>
                     <AddCircleOutlinedIcon
                     sx = {
                         { fontSize: 100, cursor: 'pointer',color:"black" } }

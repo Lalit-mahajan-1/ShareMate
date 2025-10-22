@@ -20,8 +20,6 @@ html, body {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    /* Reduced gap for tighter, cleaner look */
-    gap: 15px; 
 }
 
 .allnotes-btn {
@@ -46,6 +44,7 @@ html, body {
     cursor: pointer;
     border: 1px solid #e5e7eb;
     background-color: white; 
+    gap: 12px;
 }
 
 .subcontainer:hover {
