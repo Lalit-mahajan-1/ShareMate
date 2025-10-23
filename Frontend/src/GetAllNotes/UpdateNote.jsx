@@ -115,6 +115,21 @@ export default function UpdateNote({ Notes, Id, onUpdate, view }) {
             "& strong": { fontWeight: "bold" },
             "& em": { fontStyle: "italic" },
             "& s": { textDecoration: "line-through" },
+            "& pre": { 
+              whiteSpace: "pre-wrap", 
+              margin: "0.5em 0",
+              padding: "1em",
+              backgroundColor: "#f5f5f5",
+              borderRadius: "4px",
+              overflow: "auto"
+            },
+            "& code": {
+              fontFamily: "monospace",
+              backgroundColor: "#f5f5f5",
+              padding: "0.2em 0.4em",
+              borderRadius: "3px"
+            },
+            whiteSpace: "pre-wrap", // Preserves whitespace and line breaks
             wordBreak: "break-word",
             lineHeight: 1.6,
           }}
