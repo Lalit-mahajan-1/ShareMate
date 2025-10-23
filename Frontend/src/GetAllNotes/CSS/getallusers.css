@@ -32,11 +32,11 @@ html, body {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 15px var(--box-shadow-color);
     padding: 12px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
     overflow: hidden;
 }
 

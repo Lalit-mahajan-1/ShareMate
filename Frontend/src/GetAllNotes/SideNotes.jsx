@@ -71,10 +71,12 @@ export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title, vi
               md: 450,
             },
             padding: 3,
-            bgcolor: "#fff",
             height: "100%",
             display: "flex",
             flexDirection: "column",
+            backgroundColor:'var(--user-card-color)',
+            color:'var(--text-color)'
+            
           }}
           role="presentation"
         >
@@ -83,7 +85,7 @@ export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title, vi
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              mb: 2,
+              mb: 2
             }}
           >
             <Typography
@@ -93,18 +95,17 @@ export default function SideNotes({ Notes: initialNotes, Id, onUpdate, Title, vi
               {Title}
             </Typography>
 
-            <IconButton onClick={toggleDrawer(false)}>
+            <IconButton onClick={toggleDrawer(false)} sx={{color:'var(--normal-color)'}}>
               <CloseIcon />
             </IconButton>
           </Box>
 
-          <Divider sx={{ mb: 2 }} />
+          <Divider sx={{ mb: 2 ,color:'var(--normal-color)'}} />
           <UpdateNote 
             Notes={currentNotes} 
             Id={Id} 
             onUpdate={handleNoteUpdate}
-            view = {view}
-          />
+            view = {view}     />
         </Box>
       </Drawer>
     </Box>

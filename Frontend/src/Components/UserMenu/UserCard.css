@@ -1,10 +1,10 @@
 .user-card {
   width: 100%;
   max-width: 320px;
-  background: #ffffff;
+  background: var(--user-card-color);
   border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(230, 230, 230, 0.6);
+  box-shadow: 0 2px 1px var(--box-shadow-color);
+  border: 1px solid var(--border-color);
   padding: 24px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -66,7 +66,7 @@
 .user-name {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1a237e;
+  color:#5066c5;
   margin-bottom: 16px;
   text-align: center;
   line-height: 1.2;
@@ -76,7 +76,7 @@
 .user-browser,
 .user-login {
   font-size: 0.9rem;
-  color: #555;
+  color: #a5a4a4;
   margin: 10px 0;
   display: flex;
   align-items: center;

@@ -132,7 +132,9 @@ export default function UpdateNote({ Notes, Id, onUpdate, view }) {
             whiteSpace: "pre-wrap", // Preserves whitespace and line breaks
             wordBreak: "break-word",
             lineHeight: 1.6,
+            color:'var(--normal-color)'
           }}
+
           dangerouslySetInnerHTML={{ __html: noteText }}
         />
       ) : (

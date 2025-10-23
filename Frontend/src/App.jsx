@@ -8,25 +8,25 @@ import './App.css'
 import Dashboard from './Components/UserMenu/Dashboard.jsx';
 import UserInfo from './Components/Navbar/UserInfo.jsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from "react-router-dom";
 import axios from 'axios';
 import Viewnotes from './Components/Viewnotes/Viewnotes.jsx';
 import Publicnotes from './Components/PublicNotes/Publicnotes.jsx';
-
+import { ThemeProvider  } from './Components/ThemeAPI/Theme-context.jsx';
 function App() {
   const cliendId = import.meta.env.VITE_CLIENT_ID;
-  const [isLogedIn,setIsLogedIn] = useState(false);
-  useEffect(()=>{
-   const fetchData = async() =>{
-        try{
-           const res = await axios.get(`${import.meta.env.VITE_SERVR_URL}/isLogedIn`,{withCredentials:true});
-           setIsLogedIn(res.data.isLogedIn);
-        }
-        catch(error){}
+  const [isLogedIn, setIsLogedIn] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_SERVR_URL}/isLogedIn`, { withCredentials: true });
+        setIsLogedIn(res.data.isLogedIn);
+      }
+      catch (error) { }
     }
     fetchData();
-  },[])
+  }, [])
 
   const route = createBrowserRouter([
     { path: "/Notes/Upload", element: <Uploadfile /> },
@@ -38,11 +38,11 @@ function App() {
 
     {
       path: "/user/Signup",
-      element: !isLogedIn?<Signup />:<Navigate to="/Notes/GetAllNotes"/>,
+      element: !isLogedIn ? <Signup /> : <Navigate to="/Notes/GetAllNotes" />,
     },
     {
       path: "/user/Login",
-      element: !isLogedIn?<Login />:<Navigate to="/Notes/GetAllNotes"/>,
+      element: !isLogedIn ? <Login /> : <Navigate to="/Notes/GetAllNotes" />,
     },
     {
       path: "/",
@@ -53,22 +53,24 @@ function App() {
       element: <Dashboard />
     },
     {
-      path:"/view/:userid/:notesid",
-      element:<Viewnotes/>
+      path: "/view/:userid/:notesid",
+      element: <Viewnotes />
     },
     {
-      path:"/view/publicnotes",
-      element:<Publicnotes/>
+      path: "/view/publicnotes",
+      element: <Publicnotes />
     }
   ]);
 
   return (
-    <>
+    <> <ThemeProvider>
       <GoogleOAuthProvider clientId={cliendId}>
-            <UserInfo>
-              <RouterProvider router={route}> </RouterProvider>
-            </UserInfo>
+        <UserInfo>
+          <RouterProvider router={route}> </RouterProvider>
+        </UserInfo>
       </GoogleOAuthProvider>
+
+    </ThemeProvider>
     </>
   )
 }

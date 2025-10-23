@@ -4,10 +4,14 @@ import axios from "axios";
 import Demo from "../UserMenu/Demo.jsx";
 import "./Navbar.css";
 import { AppContext } from "./UserInfo.jsx";
+import { useTheme } from "../ThemeAPI/Theme-context.jsx";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const {user, setUser} = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = async () => {
     try {
@@ -20,24 +24,29 @@ const Navbar = () => {
       setUser(null);
     }
   };
-  
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${theme}`}>
       <div className="nav-container">
         <h2 className="logo">
-          <Link to="/">
-            ShareMate
-          </Link>
+          <Link to="/">ShareMate</Link>
         </h2>
 
         <ul className="nav-menu">
           {user ? (
             <>
+              <li className="theme-toggle" onClick={toggleTheme}>
+                {theme === "dark" ? (
+                  <DarkModeIcon titleAccess="Switch to Dark Mode" />
+                ) : (
+                  <WbSunnyIcon titleAccess="Switch to Light Mode" />
+                )}
+              </li>
               <li>
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/view/publicnotes" >Public Notes</Link>
+                <Link to="/view/publicnotes">Public Notes</Link>
               </li>
               <li>
                 <Link to="/Notes/GetAllNotes">View</Link>

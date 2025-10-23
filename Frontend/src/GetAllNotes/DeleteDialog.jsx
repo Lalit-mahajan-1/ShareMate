@@ -13,7 +13,7 @@ import { AppContext } from '../Components/Navbar/UserInfo';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-paper': {
-    background: 'linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%)',
+    background: '#ffffff',
     boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
     minWidth: '320px'
   },

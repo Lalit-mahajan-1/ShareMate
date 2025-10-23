@@ -26,6 +26,8 @@ import Downloaddialog from './Downloaddialog';
 import Sharemodal from './Sharemodal';
 import SideNotes from './SideNotes';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import { useTheme } from '../Components/ThemeAPI/Theme-context';
+import tinycolor from "tinycolor2";
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -75,6 +77,7 @@ const StyledMenu = styled((props) => (
 
 
 const GetallNotes = () => {
+    const {theme} = useTheme();
     const [notes, setNotes] = useState([]);
     const [user, setUser] = useState(null);
     const [open, setOpen] = useState(false);
@@ -138,7 +141,7 @@ const GetallNotes = () => {
                     aria-controls={open1 ? 'demo-customized-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open1 ? 'true' : undefined}
-                    style={{ color: 'black' }}
+                    style={{ color: 'var(--normal-color)' }}
                     disableElevation
                     onClick={handleClick}
                 >
@@ -167,19 +170,29 @@ const GetallNotes = () => {
             </div>
 
             <div className="container">
-                <div className="subcontainer add-notes-card" onClick={()=>navigate('/notes/upload')}>
+                <div className="subcontainer add-notes-card" onClick={() => navigate('/notes/upload')}>
                     <AddCircleOutlinedIcon
-                    sx = {{ fontSize: 100, cursor: 'pointer',color:"black" } }
+                        sx={{ fontSize: 100, cursor: 'pointer', color: "black" }}
                     />
                     <div >ADD NOTES</div>
                 </div>
 
                 {notes.map((note, index) => {
+                    const baseColor = note.theme || "#ffffff"; 
+                    const cardColor =
+                        theme === "dark"
+                            ? tinycolor(baseColor).darken(30).desaturate(15).toHexString()
+                            : baseColor;
+    
+
                     return (
                         <div
                             className="subcontainer"
                             key={note._id}
-                            style={{ backgroundColor: note.theme }}
+                            style={{
+                                backgroundColor: cardColor,
+                                color: theme === "dark" ? "#E0E8FF" : "#0A192F",
+                            }}
                         >
                             <div className="Note-Date">
                                 {note.title}

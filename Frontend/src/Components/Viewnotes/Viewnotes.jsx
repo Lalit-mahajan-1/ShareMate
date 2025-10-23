@@ -59,9 +59,8 @@ const Viewnotes = () => {
             <Typography
               variant="body1"
               sx={{ whiteSpace: "pre-line", mb: 3, lineHeight: 1.8 }}
-            >
-              {notes.Notes}
-            </Typography>
+              dangerouslySetInnerHTML={{ __html: notes.Notes }}
+           ></Typography>
 
             {notes.ImgURL && (
               <img

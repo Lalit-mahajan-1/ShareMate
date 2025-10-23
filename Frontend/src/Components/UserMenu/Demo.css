@@ -1,0 +1,38 @@
+/* Menu.css */
+
+/* Light theme */
+[data-theme="light"] {
+  --menu-bg: #ffffff;
+  --menu-text: #000000;
+  --menu-hover-bg: #f2f4f7;
+  --menu-divider: #e5e7eb;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --menu-bg: #1c202b; /* same tone as user-card */
+  --menu-text: #89b2ff;
+  --menu-hover-bg: #141b2d; /* lighter bluish hover */
+  --menu-divider: #242933;
+}
+
+/* Menu Styles */
+.custom-menu .MuiPaper-root {
+  background-color: var(--menu-bg) !important;
+  color: var(--menu-text) !important;
+  border-radius: 10px !important;
+  min-width: 180px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.custom-menu .MuiMenuItem-root {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.custom-menu .MuiMenuItem-root:hover {
+  background-color: var(--menu-hover-bg) !important;
+}
+
+.custom-menu .MuiDivider-root {
+  border-color: var(--menu-divider) !important;
+}
